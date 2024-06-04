@@ -4,17 +4,19 @@ import cv2
 from imageHelper import ImageHelper
 import os
 
+ih = ImageHelper()
 img_dir_source = './image/source/'
 img_dir_result = './image/result/'
+ih.save(img_dir_source + "img_tmp.png", ih.getCaptureImage())
+
 image_path_list = os.listdir(img_dir_source)
-ih = ImageHelper()
+
 for img_name in image_path_list:
     img_path = img_dir_source + img_name   # replace this with your own image path
     print(img_path)
 
     #resize
-    # img = ih.getPilImage(img_path)
-    # img_resize = ih.trimming(img, left=700, right=700, top=400, bottom=400)
+    # img = ih.getPilImage(img_path)    # img_resize = ih.trimming(img, left=700, right=700, top=400, bottom=400)
     # img_resize_path = "./image/img_resize.jpg"
     # img_resize.save(img_resize_path)
 
@@ -25,7 +27,7 @@ for img_name in image_path_list:
     # The MMPoseInferencer API employs a lazy inference approach,
     # creating a prediction generator when given input
     # result_generator = inferencer(img_path, show=True)
-    result_generator = inferencer(img_resize_path, show=True)
+    result_generator = inferencer(img_resize_path, show=False)
     result = next(result_generator)
     #ポイント
     keypoints = result["predictions"][0][0]['keypoints']

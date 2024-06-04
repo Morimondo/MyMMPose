@@ -52,8 +52,19 @@ class ImageHelper:
         img_resize = image.crop((left, top, w - right, h - bottom))
         return img_resize
 
+    def getCaptureImage(self, deviceId=0):
+        '''カメラから画像を取得する'''
+        cap = cv2.VideoCapture(deviceId)
+        #画像を取得
+        ret, frame = cap.read()
+        #取得できなかったとき
+        if not ret:
+            print("Caputure Device Not found")
+            return null
+        return frame
 
-    # PillowをCVに変換
+
+# PillowをCVに変換
     def pilTocv(self, image):
         ''' PIL型 -> OpenCV型 '''
         #最初からOpenCV型なら変更しない
